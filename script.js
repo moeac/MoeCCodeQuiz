@@ -1,66 +1,76 @@
 var questions = document.querySelector("#question");
-var answers = document.querySelector("#answers");
+var answers1 = document.querySelector("#answers");
 var startButton = document.querySelector("#start-button");
-
+var choice = document.querySelectorAll(".choice");
+var choiceA = document.querySelector("#choiceA");
+var choiceB = document.querySelector("#choiceB");
+var choiceC = document.querySelector("#choiceC");
+var choiceD = document.querySelector("#choiceD");
+var message = document.querySelector(".message");
+var optionNumber = 0
 
 var options = [" "]
 
-var options1 = [
-    "answer1A",
-    "answer1B",
-    "answer1C",
-    "answer1D"
+var options1 = {
+    question: 'QUESTION 1',
+    answers: ["answer1A", "answer1B", "answer1C", "answer1D"],
+    correctA: "answer1C",
+
+};
+
+var options2 = {
+    question: 'QUESTION 2',
+    answers: ["answer2A", "answer1B", "answer1C", "answer1D"],
+    correctA: "answer1D",
+
+};
+
+var options3 = {
+    question: 'QUESTION 3',
+    answers: ["answer3A", "answer1B", "answer1C", "answer1D"],
+    correctA: "answer1C",
+
+};
+
+var optionsArray = [
+    options1,
+    options2,
+    options3,
 ];
 
-var options2 = [
-    "answer2A",
-    "answer2B",
-    "answer2C",
-    "answer2D"
-];
-
-var options3 = [
-    "answer3A",
-    "answer3B",
-    "answer3C",
-    "answer3D"
-];
-
-
-function loopAnswers() {
-    for (var i = 0; i < options.length; i++) {
-        var choice = document.createElement('button');
-        choice.appendChild(document.createTextNode(options[i]));
-        var select = answers.appendChild(choice);
-        select = document.createAttribute("yoo");
-    }
-
+function questionDisplay() {
+    questions.textContent = optionsArray[optionNumber].question;
 }
 
+function loopAnswers() {
+    questionDisplay();
+    
+    for (var v = 0; v < optionsArray[optionNumber].answers.length; v++) {
+        choice[v].textContent = optionsArray[optionNumber].answers[v];
+    }
+    
+}
 
+function correctAnswer(event) {
+    event.preventDefault();
+    var selected = event.target;
+    if (selected.textContent === optionsArray[optionNumber].correctA) {
+        message.textContent = "CORRECT";
+        optionNumber++;
+        loopAnswers();
+    } else {
+        message.textContent = "WRONG";
+        optionNumber++;
+        loopAnswers();
+    }
+}
 
 function startQuestions() {
     hideButton();
-    questions.textContent = ("This is question#1");
-    options = options1;
     loopAnswers();
-    // secondQuestions();
+      
 }
 
-function secondQuestions() {
-    answers.textContent = "";
-    questions.textContent = ("This is Question#2");
-    options = options2;
-    loopAnswers();
-    thirdQuestions();
-}
-
-function thirdQuestions() {
-    answers.textContent = "";
-    questions.textContent = ("This is Question#3");
-    options = options3;
-    loopAnswers();
-}
 
 function hideButton() {
     document.getElementById('start-button').style.display = "none";
@@ -68,4 +78,7 @@ function hideButton() {
 
 startButton.addEventListener("click", startQuestions);
 
-
+choiceA.addEventListener("click", correctAnswer);
+choiceB.addEventListener("click", correctAnswer);
+choiceC.addEventListener("click", correctAnswer);
+choiceD.addEventListener("click", correctAnswer);
