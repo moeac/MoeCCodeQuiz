@@ -8,6 +8,24 @@ var choiceC = document.querySelector("#choiceC");
 var choiceD = document.querySelector("#choiceD");
 var message = document.querySelector(".message");
 var optionNumber = 0
+var timer = document.querySelector(".timer-count");
+var timerText = document.querySelector(".timer-text");
+var timeLeft = 10;
+
+function setTime() {
+    var timerInterval = setInterval(function() {
+        timeLeft--;
+        timer.textContent = timeLeft;
+
+        if (timeLeft === 1) {
+            timerText.textContent = " second remaining";
+        } else if (timeLeft === 0) {
+            clearInterval(timerInterval);
+            gameOver();
+        }
+
+    }, 1000);
+}
 
 var options = [" "]
 
@@ -32,43 +50,59 @@ var options3 = {
 
 };
 
+var options4 = {
+    question: 'QUESTION 4',
+    answers: ["answer4A", "answer1B", "answer1C", "answer1D"],
+    correctA: "answer1B",
+
+};
+
 var optionsArray = [
     options1,
     options2,
     options3,
+    options4,
 ];
 
-function questionDisplay() {
-    questions.textContent = optionsArray[optionNumber].question;
-}
 
-function loopAnswers() {
-    questionDisplay();
-    
-    for (var v = 0; v < optionsArray[optionNumber].answers.length; v++) {
-        choice[v].textContent = optionsArray[optionNumber].answers[v];
+
+function displayOptions() {
+    if (optionNumber >= optionsArray.length) {
+        gameOver();
+        return;
     }
-    
+    questions.textContent = optionsArray[optionNumber].question;
+    for (var i = 0; i < optionsArray[optionNumber].answers.length; i++) {
+        choice[i].textContent = optionsArray[optionNumber].answers[i];
+    }
 }
 
 function correctAnswer(event) {
     event.preventDefault();
+    
     var selected = event.target;
     if (selected.textContent === optionsArray[optionNumber].correctA) {
         message.textContent = "CORRECT";
         optionNumber++;
-        loopAnswers();
+        
     } else {
         message.textContent = "WRONG";
         optionNumber++;
-        loopAnswers();
+        
     }
+    displayOptions();
+}
+
+function gameOver() {
+    window.alert("game over");
 }
 
 function startQuestions() {
+    setTime();
     hideButton();
-    loopAnswers();
-      
+    displayOptions();
+    
+
 }
 
 
