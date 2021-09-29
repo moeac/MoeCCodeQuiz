@@ -1,16 +1,16 @@
-var questions = document.querySelector("#question");
-var answers1 = document.querySelector("#answers");
-var startButton = document.querySelector("#start-button");
-var choice = document.querySelectorAll(".choice");
-var choiceA = document.querySelector("#choiceA");
-var choiceB = document.querySelector("#choiceB");
-var choiceC = document.querySelector("#choiceC");
-var choiceD = document.querySelector("#choiceD");
+var questionsEl = document.getElementById("question");
+var answersEl = document.getElementById("answers");
+var buttonEl = document.getElementById("start-button");
+var choiceEl = document.querySelectorAll(".choice");
+var choiceA = document.getElementById("choiceA");
+var choiceB = document.getElementById("choiceB");
+var choiceC = document.getElementById("choiceC");
+var choiceD = document.getElementById("choiceD");
 var message = document.querySelector(".message");
-var optionNumber = 0
+var questionNumber = 0
 var timer = document.querySelector(".timer-count");
 var timerText = document.querySelector(".timer-text");
-var timeLeft = 10;
+var timeLeft = 5;
 
 function setTime() {
     var timerInterval = setInterval(function() {
@@ -20,60 +20,62 @@ function setTime() {
         if (timeLeft === 1) {
             timerText.textContent = " second remaining";
         } else if (timeLeft === 0) {
+            timerText.textContent = " seconds remaining";
             clearInterval(timerInterval);
             gameOver();
         }
-
+        if (timeLeft <= 10) {
+            timer.style.color ="red";
+            timerText.style.color ="red";
+          }
     }, 1000);
 }
 
-var options = [" "]
-
-var options1 = {
+var question1 = {
     question: 'QUESTION 1',
     answers: ["answer1A", "answer1B", "answer1C", "answer1D"],
     correctA: "answer1C",
 
 };
 
-var options2 = {
+var question2 = {
     question: 'QUESTION 2',
     answers: ["answer2A", "answer1B", "answer1C", "answer1D"],
     correctA: "answer1D",
 
 };
 
-var options3 = {
+var question3 = {
     question: 'QUESTION 3',
     answers: ["answer3A", "answer1B", "answer1C", "answer1D"],
     correctA: "answer1C",
 
 };
 
-var options4 = {
+var question4 = {
     question: 'QUESTION 4',
     answers: ["answer4A", "answer1B", "answer1C", "answer1D"],
     correctA: "answer1B",
 
 };
 
-var optionsArray = [
-    options1,
-    options2,
-    options3,
-    options4,
+var questionList = [
+    question1,
+    question2,
+    question3,
+    question4,
 ];
 
 
 
-function displayOptions() {
-    if (optionNumber >= optionsArray.length) {
+function displayquestion() {
+    if (questionNumber >= questionList.length) {
         gameOver();
         return;
     }
-    questions.textContent = optionsArray[optionNumber].question;
-    for (var i = 0; i < optionsArray[optionNumber].answers.length; i++) {
-        choice[i].textContent = optionsArray[optionNumber].answers[i];
+    questionsEl.textContent = questionList[questionNumber].question;
+    for (var i = 0; i < questionList[questionNumber].answers.length; i++) {
+        choiceEl[i].textContent = questionList[questionNumber].answers[i];
     }
 }
 
@@ -81,27 +83,26 @@ function correctAnswer(event) {
     event.preventDefault();
     
     var selected = event.target;
-    if (selected.textContent === optionsArray[optionNumber].correctA) {
+    if (selected.textContent === questionList[questionNumber].correctA) {
         message.textContent = "CORRECT";
-        optionNumber++;
+        questionNumber++;
         
     } else {
         message.textContent = "WRONG";
-        optionNumber++;
+        questionNumber++;
         
     }
-    displayOptions();
+    displayquestion();
 }
 
 function gameOver() {
-    window.alert("game over");
+    message.textContent = "GAME OVER";
 }
 
 function startQuestions() {
     setTime();
     hideButton();
-    displayOptions();
-    
+    displayquestion();
 
 }
 
@@ -110,7 +111,7 @@ function hideButton() {
     document.getElementById('start-button').style.display = "none";
 }
 
-startButton.addEventListener("click", startQuestions);
+buttonEl.addEventListener("click", startQuestions);
 
 choiceA.addEventListener("click", correctAnswer);
 choiceB.addEventListener("click", correctAnswer);
