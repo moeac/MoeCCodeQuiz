@@ -7,28 +7,31 @@ var choiceB = document.getElementById("choiceB");
 var choiceC = document.getElementById("choiceC");
 var choiceD = document.getElementById("choiceD");
 var message = document.querySelector(".message");
+var message2 = document.querySelector(".message2");
 var questionNumber = 0
 var timer = document.querySelector(".timer-count");
 var timerText = document.querySelector(".timer-text");
 var timeLeft = 5;
+var qaContainer = document.querySelector(".qa-container");
+var timerInterval; 
 
 function setTime() {
-    var timerInterval = setInterval(function() {
-        timeLeft--;
-        timer.textContent = timeLeft;
+    timerInterval = setInterval(function() {
+    timeLeft--;
+    timer.textContent = timeLeft;
 
-        if (timeLeft === 1) {
-            timerText.textContent = " second remaining";
-        } else if (timeLeft === 0) {
-            timerText.textContent = " seconds remaining";
-            clearInterval(timerInterval);
-            gameOver();
-        }
-        if (timeLeft <= 10) {
-            timer.style.color ="red";
-            timerText.style.color ="red";
-          }
-    }, 1000);
+    if (timeLeft === 1) {
+        timerText.textContent = " second remaining";
+    } else if (timeLeft === 0) {
+        timerText.textContent = " seconds remaining";
+        clearInterval(timerInterval);
+        gameOver();
+    }
+    if (timeLeft <= 10) {
+        timer.style.color ="red";
+        timerText.style.color ="red";
+      }
+}, 1000);
 }
 
 var question1 = {
@@ -59,6 +62,7 @@ var question4 = {
 
 };
 
+
 var questionList = [
     question1,
     question2,
@@ -68,8 +72,8 @@ var questionList = [
 
 
 
-function displayquestion() {
-    if (questionNumber >= questionList.length) {
+function displayQuestion() {
+    if (questionNumber === questionList.length) {
         gameOver();
         return;
     }
@@ -84,25 +88,42 @@ function correctAnswer(event) {
     
     var selected = event.target;
     if (selected.textContent === questionList[questionNumber].correctA) {
+        selected.style.color = "green";
         message.textContent = "CORRECT";
+        message.style.color = "green";
         questionNumber++;
-        
+        setTimeout(hideMessage, 500);
+        setTimeout(function(){selected.style.color = "black"}, 500);
+        setTimeout(displayQuestion, 500);
+
     } else {
+        selected.style.color = "red";
         message.textContent = "WRONG";
+        message.style.color = "red";
         questionNumber++;
-        
+        setTimeout(hideMessage, 500);
+        setTimeout(function(){selected.style.color = "black"}, 500);
+        setTimeout(displayQuestion, 500);
     }
-    displayquestion();
+    
+}
+
+function hideMessage() {
+    message.textContent = " ";
+    choiceEl.textContent = "fk";
 }
 
 function gameOver() {
-    message.textContent = "GAME OVER";
+    
+    qaContainer.hidden = true;
+    message2.textContent = "GAME OVER";
+    clearInterval(timerInterval);
 }
 
 function startQuestions() {
     setTime();
     hideButton();
-    displayquestion();
+    displayQuestion();
 
 }
 
