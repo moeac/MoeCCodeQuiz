@@ -31,12 +31,37 @@ main {
     padding: 20px;
 }
 
-#start-button {
+.message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+}
+.choice {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-style: solid;
+    
+}
+
+.button {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     margin: auto;
 }
+
+#score {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+}
+
 
 #answers {
     height: 50px;
@@ -45,6 +70,10 @@ main {
 }
 
 #question {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     font-size: 20px;
     font: bold;
 }

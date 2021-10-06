@@ -12,34 +12,53 @@
 <body>
 
   <header>
-    <nav class = "high score">Highscores</nav>
-    <div class = "card timer">
-      <div class = "timer text">
-        <div class = "timer count">60</div>
-        <h4>seconds remaining</h4>
+    <nav class = "high-score">Highscores</nav>
+    <div class = "card-timer">
+        <div class = "timer-count">60</div>
+        <h4 class = "timer-text">seconds remaining</h4>
     </div>
   </header>
 
   <main>
-    <section class = "container">  
-    <section id = "question">Ready to start?</section>
-    <section id = "answers-container">
-        <ul id = "answers"></ul>
-          <div class = border>
-            <p class = choice id = choiceA></p>
-          </div>
-          <div class = border>
-            <p class = choice id = choiceB></p>
-          </div>
-          <div class = border>
-            <p class = choice id = choiceC></p>
-          </div>
-          <div class = border>
-            <p class = choice id = choiceD></p>
-          </div>
-    </section>
-    <div class = "message"></div>
-    <button id = "start-button">Start</button>
+    <section class = "container">
+      <section id = "game-over">
+        <div class = "message" id = "message-1"></div>
+        <div id = score></div>
+        <form>
+          <input type = "text" id = "user-id" placeholder="Input Initials">
+          <button class = "button" id = "submit-button">Submit</button>
+        </form>
+
+        <button class = "button" id = "redo-button">Again!</button>
+        <button class = "button" id = "clear-button">Clear Scores</button>
+        <h4>High scores list</h4>
+        <div id = "hs-list"></div>
+        
+      </section>
+      <section class = "qa-container">  
+        <section id = "question">Ready to start?</section>
+        
+        <section id = "answers-container">
+          
+          <ul id = "answers"></ul>
+            <div class = border>
+              <p class = choice id = choiceA></p>
+            </div>
+            <div class = border>
+              <p class = choice id = choiceB></p>
+            </div>
+            <div class = border>
+              <p class = choice id = choiceC></p>
+            </div>
+            <div class = border>
+              <p class = choice id = choiceD></p>
+            </div>
+        </section>
+      </section>
+      
+      <div class = "message" id = "message-2"></div>
+      <div class = "message" id = "message-3"></div>
+      <button class = button id = "start-button">Start</button>
     </section>
   </main>
   <script src="script.js"></script>
