@@ -10,33 +10,37 @@
 </head>
 
 <body>
-
+<!-- highscore tab and timer -->
   <header>
-    <nav class = "high-score">Highscores</nav>
+    <button id = "high-score">Highscores</button>
     <div class = "card-timer">
-        <div class = "timer-count">60</div>
+        <div class = "timer-count">20</div>
         <h4 class = "timer-text">seconds remaining</h4>
     </div>
   </header>
 
   <main>
     <section class = "container">
+      <!-- displays game over section -->
       <section id = "game-over">
         <div class = "message" id = "message-1"></div>
         <div id = score></div>
         <form>
-          <input type = "text" id = "user-id" placeholder="Input Initials">
+          <!-- form requests user input -->
+          <input type = "text" id = "user-id" class = "input" placeholder="Input Initials">
           <button class = "button" id = "submit-button">Submit</button>
         </form>
-
+        <!-- buttons to redo and clear highscore list -->
         <button class = "button" id = "redo-button">Again!</button>
         <button class = "button" id = "clear-button">Clear Scores</button>
         <h4>High scores list</h4>
         <div id = "hs-list"></div>
-        
       </section>
+
+      <!-- displays questions and answers -->
       <section class = "qa-container">  
-        <section id = "question">Ready to start?</section>
+        <h4 id = current-score></h4>
+        <section id = "question">Ready to be disappointed? Press start</section>
         
         <section id = "answers-container">
           
@@ -55,9 +59,10 @@
             </div>
         </section>
       </section>
-      
+      <!-- messages to display on correct/wrong input -->
       <div class = "message" id = "message-2"></div>
       <div class = "message" id = "message-3"></div>
+      <!-- start button -->
       <button class = button id = "start-button">Start</button>
     </section>
   </main>
